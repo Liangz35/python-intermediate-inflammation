@@ -30,4 +30,6 @@ def display_patient_record(patient):
     for obs in patient.observations:
         print(obs.day, obs.value)
 
-        
+
+
+def display_statistics(patient):
