@@ -24,6 +24,7 @@ def visualize(data_dict):
 
     plt.show()
 
+
 def display_patient_record(patient):
     """Display data for a single patient."""
     print(patient.name)
