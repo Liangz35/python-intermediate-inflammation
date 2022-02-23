@@ -31,11 +31,3 @@ def display_patient_record(patient):
         print(obs.day, obs.value)
 
 
-
-def display_statistics(patient):
-    """ Display summary statistics for observations. """
-    from inflammation import models
-    print(patient.name)
-    mean = daily_mean(patient.observations)
-    max = daily_max(patient.observations)
-    min = daily_min(patient.observations)
