@@ -2,11 +2,13 @@
 """Software for managing and analysing patients' inflammation data in our imaginary hospital."""
 
 import argparse
+
 from inflammation import models, views
 
 
 def main(args):
     """The MVC Controller of the patient inflammation data system.
+
     The Controller is responsible for:
     - selecting the necessary models and views for the current task
     - passing data between models and views
@@ -19,22 +21,34 @@ def main(args):
         inflammation_data = models.load_csv(filename)
 
         view_data = {
-                'average': models.daily_mean(inflammation_data),
-                'max': models.daily_max(inflammation_data),
-                'min': models.daily_min(inflammation_data)
-                }
+            'average': models.daily_mean(inflammation_data),
+            'max': models.daily_max(inflammation_data),
+            'min': models.daily_min(inflammation_data),
+            'standard deviation': models.daily_standard_deviation(inflammation_data)}
 
         views.visualize(view_data)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-            description='A basic patient inflammation data management system')
+        description='A basic patient data management system')
 
     parser.add_argument(
-            'infiles',
-            nargs='+',
-            help='Input CSV(s) containing inflammation series for each patient')
+        'infiles',
+        nargs='+',
+        help='Input CSV(s) containing inflammation series for each patient')
+
+    parser.add_argument(
+        '--view',
+        default='visualize',
+        choices=['visualize', 'record'],
+        help='Which view should be used?')
+
+    parser.add_argument(
+        '--patient',
+        type=int,
+        default=0,
+        help='Which patient should be displayed?')
 
     args = parser.parse_args()
 
